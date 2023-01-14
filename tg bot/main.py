@@ -88,4 +88,4 @@ def change_filename(call):
 
 
 
-bot.polling(True, timeout=120)
+bot.polling(True)
