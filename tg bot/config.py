@@ -1,4 +1,4 @@
-token = "5432143194:AAH0osqOi1faXCHfGLGDUgM1HYYFKs9LFUU"
+token = ""
 
 start_text = \
 """🕹 Этот бот создан <b>загрузки песен</b> в игру <b>Rhythm Rampage</b>
