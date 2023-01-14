@@ -29,7 +29,10 @@ def audio_b(message):
         for i in os.listdir("custom music/"):
             if str(message.from_user.id) in i:
                 os.rename(f"custom music/{i}", f"custom music/{message.from_user.id}.mp3")
-                os.remove(f"custom music/{i[:-4]}.txt")
+                try:
+                    os.remove(f"custom music/{i[:-4]}.txt")
+                except:
+                    pass
                 break
 
         with open(f"custom music/{message.from_user.id}.mp3", 'wb') as f:
@@ -38,11 +41,17 @@ def audio_b(message):
         with open(f"custom music/{message.from_user.id}.txt", "w") as f:
             try:
                 f.write(f'{bit_receiver.main_song_handler(f"custom music/{message.from_user.id}.mp3")}\n')
-                f.write(f'"{f"{message.from_user.id}.mp3"}"\n')
+                f.write(f'"{f"{message.from_user.id}.mp3"}"\n')  # ToDo: убрать два форматирования и убрать замену ковычек при обработке информации в music_data.py
                 f.write(f'{round(MP3(f"custom music/{message.from_user.id}.mp3").info.length)}')
             except:
-                os.remove(f"custom music/{message.from_user.id}.mp3")
-                os.remove(f"custom music/{message.from_user.id}.txt")
+                for i in os.listdir("custom music/"):
+                    if str(message.from_user.id) in i:
+                        os.remove(f"custom music/{message.from_user.id}.mp3")
+                        try:
+                            os.remove(f"custom music/{message.from_user.id}.txt")
+                        except:
+                            pass
+                        break
                 bot.edit_message_text(message_id=bot_message.id, chat_id=message.chat.id, text=f"<b>Произошла ошибка</b> при обработке музыки\n<b>Попробуйте другой файл</b>", parse_mode="html")
                 return
 
