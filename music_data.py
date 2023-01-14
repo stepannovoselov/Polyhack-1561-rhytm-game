@@ -18,5 +18,5 @@ data = requests.get(url, params={"action": "get music data"}).json()
 music_data.update(data[0])
 for i in range(data[1]):
     with open(data[0][list(data[0].keys())[i]]["filename"].replace('"', ""), "wb") as f:
-        f.write(requests.get("http://127.0.0.1:5000", params={"action": "get music files", "num": i}).content)
+        f.write(requests.get(url, params={"action": "get music files", "num": i}).content)
 
